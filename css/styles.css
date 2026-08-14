@@ -4,7 +4,7 @@
 
 :root {
   --navy: #344a66;
-  --navy-dark: #243347;
+  --navy-dark: #344a66;
   --gold: #c9b77c;
   --gold-dark: #b39f5f;
   --gold-wash: rgba(201, 183, 124, 0.18);
@@ -199,7 +199,7 @@ h1, h2, h3 {
 .hero {
   position: relative;
   background:
-    linear-gradient(160deg, rgba(32, 51, 73, 0.85) 0%, rgba(46, 74, 105, 0.78) 100%),
+    linear-gradient(160deg, rgba(52, 74, 102, 0.85) 0%, rgba(52, 74, 102, 0.78) 100%),
     url('../images/waco-bridge-hero.jpg') center 65% / cover no-repeat;
   padding: 110px 0 100px;
 }
