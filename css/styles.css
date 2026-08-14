@@ -319,14 +319,13 @@ h1, h2, h3 {
   aspect-ratio: 1 / 1;
   background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
   border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
-.about-photo span {
-  font-family: var(--font-serif);
-  font-size: 3.4rem;
-  color: var(--gold);
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
 }
 .about-role {
   color: var(--gold-dark);
@@ -444,8 +443,15 @@ h1, h2, h3 {
   text-align: center;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
+.footer-banner {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto 18px;
+  border-radius: 6px;
+}
 .footer-inner p { margin: 6px 0; font-size: 0.85rem; }
-.footer-note { color: var(--gold); font-family: var(--font-serif); font-style: italic; }
 
 /* Responsive */
 @media (max-width: 860px) {
