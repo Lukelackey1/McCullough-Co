@@ -1,5 +1,4 @@
 .DS_Store
-.claude/
 
 # Source reference material (not site assets — contains internal email correspondence)
 *.pdf
