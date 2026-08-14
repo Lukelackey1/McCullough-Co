@@ -16,20 +16,21 @@ if (navToggle && siteNav) {
   });
 }
 
-// FAQ accordion
-document.querySelectorAll('.faq-question').forEach((button) => {
+// Accordion (Services + FAQ) — each .accordion group opens independently
+document.querySelectorAll('.accordion-toggle').forEach((button) => {
   button.addEventListener('click', () => {
     const expanded = button.getAttribute('aria-expanded') === 'true';
-    const answer = button.nextElementSibling;
+    const panel = button.nextElementSibling;
+    const group = button.closest('.accordion');
 
-    document.querySelectorAll('.faq-question').forEach((btn) => {
+    group.querySelectorAll('.accordion-toggle').forEach((btn) => {
       btn.setAttribute('aria-expanded', 'false');
       btn.nextElementSibling.style.maxHeight = null;
     });
 
     if (!expanded) {
       button.setAttribute('aria-expanded', 'true');
-      answer.style.maxHeight = answer.scrollHeight + 'px';
+      panel.style.maxHeight = panel.scrollHeight + 'px';
     }
   });
 });
