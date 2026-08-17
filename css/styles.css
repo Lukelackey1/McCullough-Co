@@ -85,6 +85,15 @@ h1, h2, h3 {
 }
 .section-title.center { text-align: center; margin-bottom: 48px; }
 
+/* Lead line under a centered section title. The negative top margin pulls it
+   up into the title's 48px gap so title + lead read as one block. */
+.section-lead {
+  max-width: 640px;
+  margin: -34px auto 48px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
 /* Buttons */
 .btn {
   display: inline-block;
