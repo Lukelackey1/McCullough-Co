@@ -241,7 +241,7 @@ h1, h2, h3 {
      sections. The media layers are absolutely positioned, so only .hero-inner
      is in flow and the centering applies to it alone. */
   min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100dvh - var(--header-h));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -351,7 +351,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 #faq,
 #contact {
   min-height: calc(100vh - var(--header-h));
-  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100dvh - var(--header-h));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -959,11 +959,11 @@ body.modal-open { overflow: hidden; }
    phones — a 700px tablet overran the screen on Services, Approach and About
    with the desktop scale. */
 @media (max-width: 760px) {
-  .section { padding: 40px 0; }
-  .eyebrow { font-size: 0.66rem; letter-spacing: 0.1em; margin-bottom: 6px; }
-  .section-title { font-size: 1.55rem; }
-  .section-title.center { margin-bottom: 20px; }
-  .section-lead { font-size: 0.88rem; margin: -10px auto 22px; }
+  .section { padding: 26px 0; }
+  .eyebrow { font-size: 0.66rem; letter-spacing: 0.1em; margin-bottom: 5px; }
+  .section-title { font-size: 1.45rem; }
+  .section-title.center { margin-bottom: 16px; }
+  .section-lead { font-size: 0.85rem; margin: -8px auto 18px; }
   .btn-lg { padding: 13px 22px; font-size: 0.92rem; }
 
   .hero { padding-bottom: 40px; }
@@ -993,17 +993,19 @@ body.modal-open { overflow: hidden; }
   .value-card h3 { font-size: 0.92rem; margin-bottom: 4px; }
   .value-card p { font-size: 0.78rem; line-height: 1.45; }
 
-  .approach-steps { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .approach-steps li { padding: 16px 14px 18px; }
+  .approach-steps { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .approach-steps li { padding: 12px 12px 14px; }
   .approach-steps li::after { display: none; }
-  .step-num { width: 32px; height: 32px; font-size: 0.8rem; margin-bottom: 10px; }
-  .approach-steps h3 { font-size: 0.95rem; }
-  .approach-steps p { font-size: 0.78rem; line-height: 1.45; }
+  .step-num { width: 26px; height: 26px; font-size: 0.72rem; margin-bottom: 8px; }
+  .approach-steps h3 { font-size: 0.9rem; margin-bottom: 4px; }
+  .approach-steps p { font-size: 0.76rem; line-height: 1.4; }
 
-  .about-photo { max-width: 132px; }
-  .about-inner { gap: 18px; }
-  .about-copy p { font-size: 0.88rem; }
-  .pull-quote { font-size: 1rem; }
+  .about-photo { max-width: 78px; }
+  .about-inner { gap: 12px; }
+  .about-copy h2 { font-size: 1.28rem; }
+  .about-role { font-size: 0.85rem; margin-bottom: 10px; }
+  .about-copy p { font-size: 0.84rem; line-height: 1.5; margin-bottom: 10px; }
+  .pull-quote { font-size: 0.9rem; padding-left: 14px; margin: 10px 0 0; }
 
   .accordion-toggle { padding: 14px 16px; font-size: 0.92rem; }
   .accordion-panel p,
@@ -1020,11 +1022,26 @@ body.modal-open { overflow: hidden; }
 
   .service-grid { grid-template-columns: 1fr; }
 
-  .modal { padding: 16px; align-items: flex-end; }
-  .modal-window { max-height: 88vh; border-radius: 16px 16px 12px 12px; }
-  .modal-head { padding: 22px 56px 20px 24px; }
-  .modal-head h3 { font-size: 1.3rem; }
-  .modal-body { padding: 22px 24px 6px; }
-  .modal-foot { padding: 16px 24px 22px; }
-  .modal-foot .btn { display: block; text-align: center; }
+  /* The detail sheet is the whole point of tapping a service, so it gets as
+     much of the screen as it can take and a tighter list, to keep the shorter
+     services off the scrollbar entirely. */
+  .modal { padding: 10px; align-items: flex-end; }
+  .modal-window {
+    max-height: 94vh;
+    max-height: 94dvh;
+    border-radius: 16px 16px 12px 12px;
+  }
+  .modal-head { padding: 16px 52px 14px 20px; }
+  .modal-head h3 { font-size: 1.15rem; }
+  .modal-head .eyebrow { margin-bottom: 3px; }
+  .modal-body { padding: 16px 20px 4px; }
+  .modal-body li {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    margin-bottom: 9px;
+    padding-left: 20px;
+  }
+  .modal-body li::before { top: 7px; width: 6px; height: 6px; }
+  .modal-foot { padding: 12px 20px 16px; }
+  .modal-foot .btn { display: block; text-align: center; padding: 12px 20px; }
 }

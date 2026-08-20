@@ -115,6 +115,73 @@ if (siteHeader) {
   window.addEventListener('load', setHeaderHeight);
 }
 
+// Same-page links scroll themselves rather than leaving it to the browser.
+// Two things move under a native jump on a phone: Safari collapses its toolbar
+// during the scroll, which resizes every dvh-sized section beneath it, and the
+// mobile menu closes at the same moment. Either one lands the section a hundred
+// pixels off. So: scroll, wait for it to stop, then correct whatever moved.
+const headerHeight = () =>
+  siteHeader ? Math.round(siteHeader.getBoundingClientRect().height) : 0;
+
+const offsetFor = (target) =>
+  Math.round(target.getBoundingClientRect().top + window.scrollY - headerHeight());
+
+const scrollToTarget = (target, smooth) => {
+  const jump = (behavior) => window.scrollTo({
+    top: Math.max(0, offsetFor(target)),
+    behavior
+  });
+
+  jump(smooth ? 'smooth' : 'auto');
+
+  // Wait for the scroll to settle, then close the gap the resize opened up.
+  // Two corrections is plenty; the second only ever moves a pixel or two.
+  let corrections = 0;
+  let lastY = window.scrollY;
+  let stillFor = 0;
+  const deadline = performance.now() + 2000;
+
+  const check = () => {
+    if (window.scrollY === lastY) stillFor += 1;
+    else { stillFor = 0; lastY = window.scrollY; }
+
+    if (stillFor > 4) {
+      const drift = Math.round(target.getBoundingClientRect().top) - headerHeight();
+      if (Math.abs(drift) > 1 && corrections < 2) {
+        corrections += 1;
+        stillFor = 0;
+        window.scrollBy({ top: drift, behavior: 'auto' });
+      } else {
+        return;
+      }
+    }
+    if (performance.now() < deadline) requestAnimationFrame(check);
+  };
+  requestAnimationFrame(check);
+};
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  const id = link.getAttribute('href').slice(1);
+  if (!id) return;
+
+  link.addEventListener('click', (event) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    scrollToTarget(target, !reducedMotion.matches);
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  });
+});
+
+// Arriving on a deep link lands the same way, once layout has settled.
+window.addEventListener('load', () => {
+  const id = window.location.hash.slice(1);
+  const target = id && document.getElementById(id);
+  if (target) scrollToTarget(target, false);
+});
+
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
 const siteNav = document.getElementById('site-nav');
@@ -180,7 +247,10 @@ if (serviceModal) {
     serviceModal.classList.remove('is-open');
     document.body.classList.remove('modal-open');
     window.setTimeout(() => { serviceModal.hidden = true; }, 200);
-    if (lastFocused) lastFocused.focus();
+    // preventScroll: the modal's own "Request a Consultation" link closes the
+    // window and scrolls to Contact — refocusing the card would yank the page
+    // back up mid-scroll.
+    if (lastFocused) lastFocused.focus({ preventScroll: true });
   };
 
   document.querySelectorAll('.service-card').forEach((card) => {
