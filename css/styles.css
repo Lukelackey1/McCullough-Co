@@ -228,7 +228,7 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url('../images/waco-bridge-hero.jpg') center 65% / cover no-repeat;
+  background: url('../images/waco-hero-still.jpg') center center / cover no-repeat;
 }
 .hero-video {
   position: absolute;
@@ -770,6 +770,11 @@ body.modal-open { overflow: hidden; }
   border-radius: 6px;
 }
 .footer-inner p { margin: 6px 0; font-size: 0.85rem; }
+
+/* CC BY attribution for the hero footage — required by the license */
+.media-credit { font-size: 0.72rem; color: #7b8290; margin-top: 14px; }
+.media-credit a { color: #7b8290; text-decoration: underline; }
+.media-credit a:hover { color: var(--sage); }
 
 /* Responsive */
 @media (max-width: 980px) {

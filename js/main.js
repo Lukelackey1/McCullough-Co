@@ -6,8 +6,8 @@
    See videos/README.md for encoding settings.
 --------------------------------------------------------------- */
 const HERO_CLIPS = [
-  'videos/waco-suspension-bridge.mp4',
-  'videos/mclane-stadium.mp4'
+  'videos/waco-silos.mp4',
+  'videos/waco-alico.mp4'
 ];
 
 const FADE_MS = 1400; // must match the .hero-video opacity transition
