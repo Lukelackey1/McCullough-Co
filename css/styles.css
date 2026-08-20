@@ -31,6 +31,10 @@
 
   --max-width: 1140px;
   --radius: 10px;
+
+  /* Height of the sticky header. Measured and rewritten by js/main.js on load
+     and resize; this value is the fallback (14px + 42px logo + 14px + border). */
+  --header-h: 71px;
 }
 
 * { box-sizing: border-box; }
@@ -318,6 +322,27 @@ h1, h2, h3 {
 /* Sections */
 .section { padding: 88px 0; }
 .section-alt { background: var(--cream); }
+
+/* The header is sticky, so an anchor jump would tuck the section's top edge
+   underneath it. Hold every jump target down by the header's own height. */
+section[id] { scroll-margin-top: var(--header-h); }
+
+/* Nav targets fill the screen below the header, so clicking a nav link lands
+   on one whole section with none of the next one showing. min-height only —
+   a section with more content than that still grows past it. Content is
+   centered so a short section reads as composed rather than top-heavy.
+   svh (small viewport) keeps mobile honest when the URL bar is expanded. */
+#services,
+#approach,
+#about,
+#faq,
+#contact {
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 /* Navy sections — inverts the type; nested white cards keep their own colors.
    Used on Approach and Contact so the page leans blue rather than cream. */

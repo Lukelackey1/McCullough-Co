@@ -97,6 +97,24 @@ function initHeroReel() {
 
 initHeroReel();
 
+// Sticky header height -> --header-h, which drives both the scroll-margin on
+// anchor targets and the min-height of the full-screen sections. Measured
+// rather than hard-coded so it stays correct if the header's contents change.
+const siteHeader = document.querySelector('.site-header');
+
+if (siteHeader) {
+  const setHeaderHeight = () => {
+    const h = Math.round(siteHeader.getBoundingClientRect().height);
+    if (h) document.documentElement.style.setProperty('--header-h', h + 'px');
+  };
+
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight);
+  // The logo is an SVG with an intrinsic size, but re-measure once everything
+  // has loaded in case a webfont or image settles at a different height.
+  window.addEventListener('load', setHeaderHeight);
+}
+
 // Mobile nav toggle
 const navToggle = document.getElementById('nav-toggle');
 const siteNav = document.getElementById('site-nav');
