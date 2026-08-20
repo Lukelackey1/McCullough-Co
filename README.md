@@ -51,6 +51,7 @@ mis-sample of the sage, which read as muddy gold against the cream sections.
 | `--sage` | `#d0db96` | Accents on navy only — hero, nav, buttons, modal header |
 | `--sage-deep` | `#b3bd78` | Deeper sage from the logo's phone pill; currently unused |
 | `--navy-deep` | `#243347` | Footer only — `--navy` at 21% lightness, same hue |
+| `--navy-mid` | `#2c3e56` | End of Contact's gradient — the midpoint of the two navies |
 
 Sage is the only accent color, and it belongs on navy. On light backgrounds the
 accent is navy instead — sage goes muddy on warm light.
@@ -77,14 +78,17 @@ About, and Contact are
 alone, since they keep their own light fill. A `.section-alt` class is still
 defined for a cream band (`--cream`), but nothing uses it right now.
 
-The footer uses `--navy-deep`. Contact is the one navy section that meets
-another navy, so instead of a hard step it carries a vertical gradient: flat
-`--navy` through its top 45%, then a ramp down to `--navy-deep` at the bottom
-edge, landing exactly on the footer's fill. The footer's old light `border-top`
-was dropped with it — against a matching color it was the only visible seam.
-The other navy sections stay flat, since they border cream where the hard edge
-is the point. Heads up: `--navy-dark` is still defined as an exact duplicate of
-`--navy`, so it does not darken anything.
+The footer uses `--navy-deep` so it steps down from the navy Contact section
+above it rather than merging into one block; its light `border-top` marks that
+cut. Contact itself carries a vertical gradient for depth — flat `--navy`
+through its top 35%, then a ramp down to `--navy-mid` at its bottom edge. The
+ramp deliberately stops at `--navy-mid` rather than `--navy-deep`: ending on
+the footer's own fill erases the boundary, which is the thing the tonal step is
+there to create. The two are in tension — the further Contact's gradient
+descends, the weaker the cut below it. The other navy sections stay flat, since
+they border cream where the hard edge is the point. Heads up: `--navy-dark` is
+still defined as an exact duplicate of `--navy`, so it does not darken
+anything.
 
 Note that `--white` (`#f5efe0`) is the warm page background *and* the type color
 on navy, so cards use `--surface` (`#fdfbf6`) instead — a `--white` card on a

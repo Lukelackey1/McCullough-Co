@@ -8,6 +8,9 @@
   /* Same hue/sat as --navy at 21% lightness. Gives the footer a tonal step
      down so it reads as the foot of the page, not a continuation of Contact. */
   --navy-deep: #243347;
+  /* Halfway between --navy and --navy-deep. Contact's gradient ends here
+     rather than on --navy-deep, so the footer still steps down from it. */
+  --navy-mid: #2c3e56;
   /* Brand sage, sampled from the logo banner: #d0db96 bar, #b3bd78 pill */
   --sage: #d0db96;
   --sage-deep: #b3bd78;
@@ -110,10 +113,11 @@ h1, h2, h3 {
 .btn-lg { padding: 15px 32px; font-size: 1rem; }
 
 .btn-primary {
-  background: var(--sage);
-  color: var(--navy-dark);
+  background: transparent;
+  color: var(--cream-alt);
+  border-color: var(--cream-alt);
 }
-.btn-primary:hover { background: var(--near-black); color: var(--white); }
+.btn-primary:hover { background: var(--cream-alt); color: var(--navy-dark); }
 
 /* Solid navy CTA — used where the button sits on cream/white */
 .btn-navy {
@@ -191,13 +195,13 @@ h1, h2, h3 {
   font-weight: 600;
   font-size: 0.9rem;
   padding: 8px 16px;
-  color: var(--white);
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: var(--cream-alt);
+  border: 1.5px solid var(--cream-alt);
   border-radius: 999px;
   white-space: nowrap;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-.phone-pill:hover { background: var(--near-black); color: var(--white); border-color: var(--near-black); }
+.phone-pill:hover { background: var(--cream-alt); color: var(--navy-dark); border-color: var(--cream-alt); }
 .icon-phone { flex: none; }
 
 .nav-toggle {
@@ -338,11 +342,12 @@ h1, h2, h3 {
   border-left-color: var(--sage);
 }
 
-/* Contact is the only navy section that meets another navy (the darker footer),
-   so it ramps down to --navy-deep instead of ending on a hard seam. The other
-   navy sections stay flat — they border cream, where the edge is the point. */
+/* Contact deepens toward its own bottom edge, but stops at --navy-mid rather
+   than reaching the footer's --navy-deep. The gradient adds depth inside the
+   section; the footer still lands as a clean step below it. The other navy
+   sections stay flat — they border cream, where the edge is the point. */
 #contact.section-navy {
-  background: linear-gradient(to bottom, var(--navy) 0%, var(--navy) 45%, var(--navy-deep) 100%);
+  background: linear-gradient(to bottom, var(--navy) 0%, var(--navy) 35%, var(--navy-mid) 100%);
 }
 
 /* Contact block on navy */
@@ -803,6 +808,7 @@ body.modal-open { overflow: hidden; }
   color: #b9c0c9;
   padding: 32px 0;
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 /* The logo sits straight on the footer, not in its own panel. The old banner
    PNG baked in a lighter navy plate, which read as a card pasted onto the
