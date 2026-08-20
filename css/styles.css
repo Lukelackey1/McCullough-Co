@@ -113,6 +113,7 @@ h1, h2, h3 {
   font-size: 0.95rem;
   transition: background 0.2s ease, color 0.2s ease;
   border: 2px solid transparent;
+  white-space: nowrap;
 }
 .btn-lg { padding: 15px 32px; font-size: 1rem; }
 
@@ -155,7 +156,7 @@ h1, h2, h3 {
   gap: 20px;
 }
 
-.logo { display: flex; align-items: center; }
+.logo { display: flex; align-items: center; flex: none; }
 .logo img {
   height: 42px;
   width: auto;
@@ -185,6 +186,10 @@ h1, h2, h3 {
 }
 .site-nav a:hover { color: var(--sage); }
 .site-nav a:hover::after { width: 100%; }
+
+/* The in-menu CTA exists only for the mobile panel. */
+.nav-cta { display: none; }
+.nav-cta::after { content: none; }
 
 .header-actions {
   display: flex;
@@ -232,6 +237,14 @@ h1, h2, h3 {
   overflow: hidden;
   background: var(--navy);
   padding: 110px 0 100px;
+  /* Fills the first screen below the sticky header, like the nav-target
+     sections. The media layers are absolutely positioned, so only .hero-inner
+     is in flow and the centering applies to it alone. */
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Media layer: still photo underneath, crossfading flyover clips on top */
@@ -889,27 +902,33 @@ body.modal-open { overflow: hidden; }
 .media-credit a:hover { color: var(--sage); }
 
 /* Responsive */
+
+/* Between the full lockup and the collapsed bar there is a band where the nav,
+   the phone pill and the CTA together overrun the row (they used to wrap; now
+   that buttons don't wrap, they would overflow instead). The pill gives way
+   first — the number is still one tap away in Contact and the footer. */
+@media (max-width: 1140px) {
+  .header-actions .phone-pill { display: none; }
+}
+
 @media (max-width: 980px) {
   .approach-steps { grid-template-columns: repeat(2, 1fr); }
   .approach-steps li:nth-child(2n)::after { display: none; }
-}
 
-@media (max-width: 860px) {
-  .about-inner { grid-template-columns: 1fr; }
-  .about-photo { max-width: 240px; }
-}
-
-@media (max-width: 560px) {
-  .approach-steps { grid-template-columns: 1fr; gap: 16px; }
-  .approach-steps li { padding: 24px 22px 26px; }
-  .approach-steps li::after { display: none; }
-  .step-num { width: 40px; height: 40px; margin-bottom: 16px; }
-}
-
-@media (max-width: 760px) {
-  .site-nav, .header-actions .phone-pill { display: none; }
-  .header-actions { gap: 10px; }
+  /* The bar collapses to logo + call + menu here, not at phone width: the
+     full lockup needs ~1000px before the CTA wraps onto two lines (which
+     doubled the header's height, and --header-h passed that on to every
+     section below it) and the logo gets squeezed out of the row entirely.
+     The CTA moves into the menu as .nav-cta; the phone pill stays as an icon
+     so calling is still one tap. */
+  .site-nav { display: none; }
   .nav-toggle { display: flex; }
+  .header-cta { display: none; }
+  .logo img { height: 34px; }
+  .header-actions { gap: 10px; }
+  .header-actions .phone-pill { display: inline-flex; padding: 10px; }
+  .phone-label { display: none; }
+  .icon-phone { width: 18px; height: 18px; }
 
   .site-nav.open {
     display: flex;
@@ -925,6 +944,69 @@ body.modal-open { overflow: hidden; }
     gap: 16px;
   }
   .site-nav.open a:hover { color: var(--navy); }
+  .site-nav.open .nav-cta { display: block; text-align: center; }
+}
+
+@media (max-width: 860px) {
+  .about-inner { grid-template-columns: 1fr; }
+  .about-photo { max-width: 240px; }
+}
+
+@media (max-width: 560px) {
+  /* Everything below is one idea: the desktop spacing scale is too generous at
+     phone width, where it costs a screenful of scrolling per section. */
+  .section { padding: 56px 0; }
+  .hero { padding-bottom: 56px; }
+  .hero h1 { font-size: 2.05rem; }
+  /* Keeps "Bookkeeping · Tax Preparation · Advisory" from breaking with one
+     word stranded on its own line. */
+  .eyebrow { font-size: 0.7rem; letter-spacing: 0.1em; }
+  .hero-sub { font-size: 1rem; margin-bottom: 28px; }
+  .hero-actions { flex-direction: column; gap: 12px; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+
+  .section-title.center { margin-bottom: 32px; }
+  .section-lead { margin: -20px auto 32px; }
+  .btn-lg { padding: 14px 24px; }
+
+  .service-card { padding: 24px 22px 22px; }
+  .value-card { padding: 22px; }
+  .accordion-toggle { padding: 18px 18px; }
+  .contact-actions .btn { width: 100%; text-align: center; }
+
+  .approach-steps { grid-template-columns: 1fr; gap: 16px; }
+  .approach-steps li { padding: 24px 22px 26px; }
+  .approach-steps li::after { display: none; }
+  .step-num { width: 40px; height: 40px; margin-bottom: 16px; }
+}
+
+@media (max-width: 760px) {
+  /* The flyover clips are 16:9. Filling a portrait hero with them crops the
+     frame to roughly a quarter of its width — the bridge, the silos and the
+     skyline all fall outside it. On phones the clip becomes a full-width band
+     at the top of the hero at its own aspect ratio, whole, and the copy sits
+     below it on navy. The scrim only has to cover the band, so it lifts off
+     the type entirely. */
+  .hero {
+    justify-content: flex-end;
+    padding-top: calc(56.25vw + 28px);
+  }
+  .hero-media {
+    background-size: contain;
+    background-position: center top;
+  }
+  .hero-video {
+    object-fit: contain;
+    object-position: center top;
+  }
+  .hero::after,
+  .hero.has-video::after {
+    background: linear-gradient(180deg,
+      rgba(30, 43, 61, 0.5) 0%,
+      rgba(30, 43, 61, 0.12) 30%,
+      rgba(52, 74, 102, 0.72) 52%,
+      var(--navy) 62%);
+  }
 
   .who-strip-inner { flex-direction: column; align-items: center; gap: 12px; }
 
