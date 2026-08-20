@@ -5,6 +5,9 @@
 :root {
   --navy: #344a66;
   --navy-dark: #344a66;
+  /* Same hue/sat as --navy at 21% lightness. Gives the footer a tonal step
+     down so it reads as the foot of the page, not a continuation of Contact. */
+  --navy-deep: #243347;
   /* Brand sage, sampled from the logo banner: #d0db96 bar, #b3bd78 pill */
   --sage: #d0db96;
   --sage-deep: #b3bd78;
@@ -789,11 +792,11 @@ body.modal-open { overflow: hidden; }
 
 /* Footer */
 .site-footer {
-  background: var(--navy-dark);
+  background: var(--navy-deep);
   color: #b9c0c9;
   padding: 32px 0;
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .footer-banner {
   display: block;
