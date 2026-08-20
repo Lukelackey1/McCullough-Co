@@ -952,62 +952,70 @@ body.modal-open { overflow: hidden; }
   .about-photo { max-width: 240px; }
 }
 
-@media (max-width: 560px) {
-  /* Everything below is one idea: the desktop spacing scale is too generous at
-     phone width, where it costs a screenful of scrolling per section. */
-  .section { padding: 56px 0; }
-  .hero { padding-bottom: 56px; }
-  .hero h1 { font-size: 2.05rem; }
-  /* Keeps "Bookkeeping · Tax Preparation · Advisory" from breaking with one
-     word stranded on its own line. */
-  .eyebrow { font-size: 0.7rem; letter-spacing: 0.1em; }
-  .hero-sub { font-size: 1rem; margin-bottom: 28px; }
-  .hero-actions { flex-direction: column; gap: 12px; }
+/* One idea below: the desktop type and spacing scale is built for a 1140px
+   column, and on a phone it runs each section well past a screenful. Every
+   value here is pulled in so a nav tap lands on a whole section, the same way
+   it does on a desktop. Applies to the whole handheld band, not just small
+   phones — a 700px tablet overran the screen on Services, Approach and About
+   with the desktop scale. */
+@media (max-width: 760px) {
+  .section { padding: 40px 0; }
+  .eyebrow { font-size: 0.66rem; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .section-title { font-size: 1.55rem; }
+  .section-title.center { margin-bottom: 20px; }
+  .section-lead { font-size: 0.88rem; margin: -10px auto 22px; }
+  .btn-lg { padding: 13px 22px; font-size: 0.92rem; }
+
+  .hero { padding-bottom: 40px; }
+  .hero h1 { font-size: 1.95rem; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 24px; }
+  .hero-actions { flex-direction: column; gap: 10px; }
   .hero-actions .btn { width: 100%; text-align: center; }
 
-  .section-title.center { margin-bottom: 32px; }
-  .section-lead { margin: -20px auto 32px; }
-  .btn-lg { padding: 14px 24px; }
+  /* Service cards become tappable rows: number, name, arrow. The description
+     is the first thing the modal shows, so on a phone it is duplication that
+     costs four lines a card. */
+  .service-grid { gap: 10px; }
+  .service-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+  }
+  .service-num { margin-bottom: 0; font-size: 0.68rem; }
+  .service-card h3 { font-size: 1rem; margin: 0; flex: 1; }
+  .service-card p { display: none; }
+  .service-more { margin: 0; font-size: 0; gap: 0; }
 
-  .service-card { padding: 24px 22px 22px; }
-  .value-card { padding: 22px; }
-  .accordion-toggle { padding: 18px 18px; }
-  .contact-actions .btn { width: 100%; text-align: center; }
+  .values-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .value-card { padding: 14px 14px 16px; border-left-width: 3px; }
+  .value-card h3 { font-size: 0.92rem; margin-bottom: 4px; }
+  .value-card p { font-size: 0.78rem; line-height: 1.45; }
 
-  .approach-steps { grid-template-columns: 1fr; gap: 16px; }
-  .approach-steps li { padding: 24px 22px 26px; }
+  .approach-steps { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .approach-steps li { padding: 16px 14px 18px; }
   .approach-steps li::after { display: none; }
-  .step-num { width: 40px; height: 40px; margin-bottom: 16px; }
+  .step-num { width: 32px; height: 32px; font-size: 0.8rem; margin-bottom: 10px; }
+  .approach-steps h3 { font-size: 0.95rem; }
+  .approach-steps p { font-size: 0.78rem; line-height: 1.45; }
+
+  .about-photo { max-width: 132px; }
+  .about-inner { gap: 18px; }
+  .about-copy p { font-size: 0.88rem; }
+  .pull-quote { font-size: 1rem; }
+
+  .accordion-toggle { padding: 14px 16px; font-size: 0.92rem; }
+  .accordion-panel p,
+  .accordion-panel li { font-size: 0.88rem; }
+
+  .contact-sub { font-size: 0.92rem; margin-bottom: 24px; }
+  .contact-actions { margin-bottom: 28px; }
+  .contact-actions .btn { width: 100%; text-align: center; }
+  .contact-details { gap: 14px; }
 }
 
 @media (max-width: 760px) {
-  /* The flyover clips are 16:9. Filling a portrait hero with them crops the
-     frame to roughly a quarter of its width — the bridge, the silos and the
-     skyline all fall outside it. On phones the clip becomes a full-width band
-     at the top of the hero at its own aspect ratio, whole, and the copy sits
-     below it on navy. The scrim only has to cover the band, so it lifts off
-     the type entirely. */
-  .hero {
-    justify-content: flex-end;
-    padding-top: calc(56.25vw + 28px);
-  }
-  .hero-media {
-    background-size: contain;
-    background-position: center top;
-  }
-  .hero-video {
-    object-fit: contain;
-    object-position: center top;
-  }
-  .hero::after,
-  .hero.has-video::after {
-    background: linear-gradient(180deg,
-      rgba(30, 43, 61, 0.5) 0%,
-      rgba(30, 43, 61, 0.12) 30%,
-      rgba(52, 74, 102, 0.72) 52%,
-      var(--navy) 62%);
-  }
-
   .who-strip-inner { flex-direction: column; align-items: center; gap: 12px; }
 
   .service-grid { grid-template-columns: 1fr; }
