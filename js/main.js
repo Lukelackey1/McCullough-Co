@@ -5,9 +5,12 @@
    loops forever. Any number of clips works — add or remove lines.
    See videos/README.md for encoding settings.
 --------------------------------------------------------------- */
+// Ordered by time of day: midday, then golden hour, then dusk.
 const HERO_CLIPS = [
+  'videos/waco-brazos.mp4',
   'videos/waco-silos.mp4',
-  'videos/waco-alico.mp4'
+  'videos/waco-suspension-bridge.mp4',
+  'videos/waco-alico-sunset.mp4'
 ];
 
 const FADE_MS = 1400; // must match the .hero-video opacity transition

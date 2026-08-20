@@ -808,9 +808,30 @@ body.modal-open { overflow: hidden; }
 }
 .footer-inner p { margin: 6px 0; font-size: 0.85rem; }
 
-/* CC BY attribution for the hero footage — required by the license */
-.media-credit { font-size: 0.72rem; color: #7b8290; margin-top: 14px; }
-.media-credit a { color: #7b8290; text-decoration: underline; }
+/* CC BY attribution for the hero footage — required by the license, but kept
+   folded away behind a tap so it doesn't compete with the real footer content. */
+.media-credit { margin-top: 18px; color: #6f7681; }
+.media-credit summary {
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.media-credit summary::-webkit-details-marker { display: none; }
+.media-credit summary:hover,
+.media-credit summary:focus-visible { color: var(--sage); }
+.media-credit[open] summary { margin-bottom: 4px; }
+.media-credit p {
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 0.7rem;
+  line-height: 1.7;
+}
+.media-credit a { color: inherit; text-decoration: underline; }
 .media-credit a:hover { color: var(--sage); }
 
 /* Responsive */
