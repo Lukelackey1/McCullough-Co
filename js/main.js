@@ -23,10 +23,14 @@ function initHeroReel() {
 
   let clipIndex = 0;
   let activeLayer = 0;
+  let started = false;
 
-  // Any failure at all (missing file, unsupported codec, blocked autoplay)
-  // leaves the hero exactly as it was before the video existed.
+  // A failure before anything has played (missing file, unsupported codec,
+  // blocked autoplay) leaves the hero exactly as it was without the video.
+  // Once the reel is running, a hiccup on a queued clip must NOT tear down
+  // the clip currently on screen — advance() handles that case instead.
   const abort = () => {
+    if (started) return;
     hero.classList.remove('has-video');
     layers.forEach((layer) => {
       layer.classList.remove('is-active');
@@ -34,7 +38,14 @@ function initHeroReel() {
     });
   };
 
-  layers.forEach((layer) => layer.addEventListener('error', abort));
+  layers.forEach((layer) => {
+    layer.addEventListener('error', abort);
+    layer.addEventListener('playing', () => {
+      started = true;
+      hero.classList.add('has-video');
+      layer.classList.add('is-active');
+    });
+  });
 
   const play = (layer) => {
     const attempt = layer.play();
@@ -46,7 +57,9 @@ function initHeroReel() {
     const next = layers[(activeLayer + 1) % 2];
 
     // A single clip has nowhere to go — just restart it in place.
-    if (HERO_CLIPS.length === 1) {
+    // Same when the queued clip failed to load: replaying what we already
+    // have on screen beats crossfading into a broken layer.
+    if (HERO_CLIPS.length === 1 || next.error) {
       current.currentTime = 0;
       play(current);
       return;
@@ -75,11 +88,6 @@ function initHeroReel() {
     layers[1].src = HERO_CLIPS[1];
     layers[1].load();
   }
-
-  layers[0].addEventListener('playing', () => {
-    hero.classList.add('has-video');
-    layers[0].classList.add('is-active');
-  }, { once: true });
 
   play(layers[0]);
 }
