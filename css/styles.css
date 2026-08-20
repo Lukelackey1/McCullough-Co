@@ -338,6 +338,13 @@ h1, h2, h3 {
   border-left-color: var(--sage);
 }
 
+/* Contact is the only navy section that meets another navy (the darker footer),
+   so it ramps down to --navy-deep instead of ending on a hard seam. The other
+   navy sections stay flat — they border cream, where the edge is the point. */
+#contact.section-navy {
+  background: linear-gradient(to bottom, var(--navy) 0%, var(--navy) 45%, var(--navy-deep) 100%);
+}
+
 /* Contact block on navy */
 .section-navy .contact-sub { color: var(--on-navy-soft); }
 .section-navy .contact-details {
@@ -796,7 +803,6 @@ body.modal-open { overflow: hidden; }
   color: #b9c0c9;
   padding: 32px 0;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 /* The logo sits straight on the footer, not in its own panel. The old banner
    PNG baked in a lighter navy plate, which read as a card pasted onto the

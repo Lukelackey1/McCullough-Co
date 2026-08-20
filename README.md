@@ -77,9 +77,14 @@ About, and Contact are
 alone, since they keep their own light fill. A `.section-alt` class is still
 defined for a cream band (`--cream`), but nothing uses it right now.
 
-The footer uses `--navy-deep` so it steps down from the navy Contact section
-above it rather than merging into one block. Heads up: `--navy-dark` is still
-defined as an exact duplicate of `--navy`, so it does not darken anything.
+The footer uses `--navy-deep`. Contact is the one navy section that meets
+another navy, so instead of a hard step it carries a vertical gradient: flat
+`--navy` through its top 45%, then a ramp down to `--navy-deep` at the bottom
+edge, landing exactly on the footer's fill. The footer's old light `border-top`
+was dropped with it — against a matching color it was the only visible seam.
+The other navy sections stay flat, since they border cream where the hard edge
+is the point. Heads up: `--navy-dark` is still defined as an exact duplicate of
+`--navy`, so it does not darken anything.
 
 Note that `--white` (`#f5efe0`) is the warm page background *and* the type color
 on navy, so cards use `--surface` (`#fdfbf6`) instead — a `--white` card on a
