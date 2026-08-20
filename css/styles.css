@@ -1000,9 +1000,32 @@ body.modal-open { overflow: hidden; }
   .approach-steps h3 { font-size: 0.9rem; margin-bottom: 4px; }
   .approach-steps p { font-size: 0.76rem; line-height: 1.4; }
 
-  .about-photo { max-width: 78px; }
-  .about-inner { gap: 12px; }
-  .about-copy h2 { font-size: 1.28rem; }
+  /* The photo stops floating above the copy as a stray thumbnail and pairs
+     with the name instead, the way a byline reads: portrait left, eyebrow,
+     name and role stacked beside it, the copy running full width underneath.
+     display: contents lifts .about-copy's children into the same grid so the
+     two blocks can share rows. */
+  .about-inner {
+    /* Scales with the handheld band: 92px on a phone, ~130px on a 720px
+       tablet, where a fixed 92px would read as a stamp next to the copy. */
+    grid-template-columns: clamp(92px, 18vw, 140px) 1fr;
+    column-gap: 16px;
+    row-gap: 0;
+    align-items: center;
+  }
+  .about-copy { display: contents; }
+  .about-photo {
+    max-width: none;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    align-self: center;
+  }
+  .about-copy > .eyebrow { grid-column: 2; grid-row: 1; align-self: end; }
+  .about-copy > h2 { grid-column: 2; grid-row: 2; }
+  .about-copy > .about-role { grid-column: 2; grid-row: 3; align-self: start; }
+  .about-copy > p:not(.eyebrow):not(.about-role) { grid-column: 1 / -1; }
+  .about-copy > .about-role { margin-top: 0; }
+  .about-copy h2 { font-size: 1.28rem; margin: 2px 0; }
   .about-role { font-size: 0.85rem; margin-bottom: 10px; }
   .about-copy p { font-size: 0.84rem; line-height: 1.5; margin-bottom: 10px; }
   .pull-quote { font-size: 0.9rem; padding-left: 14px; margin: 10px 0 0; }
