@@ -41,9 +41,9 @@ before pushing.
 
 ## Brand palette
 
-Both accents are sampled from `images/logo-banner.png` — don't eyeball them.
-An earlier version of this site used `#c9b77c`, a yellowed mis-sample of the
-sage, which read as muddy gold against the cream sections.
+Both accents are sampled from the original `images/logo-banner.png` — don't
+eyeball them. An earlier version of this site used `#c9b77c`, a yellowed
+mis-sample of the sage, which read as muddy gold against the cream sections.
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -54,6 +54,21 @@ sage, which read as muddy gold against the cream sections.
 
 Sage is the only accent color, and it belongs on navy. On light backgrounds the
 accent is navy instead — sage goes muddy on warm light.
+
+## Logo files
+
+`images/logo-lockup.svg` is the live logo, used in both the header and the
+footer. It was traced from the original PNGs, so it is resolution-independent
+and stays sharp on retina screens where the old raster art went soft. It is
+transparent and draws its own white/sage, so it sits on any navy background.
+
+`images/logo-banner.svg` is the full banner lockup (wordmark, phone pill, and
+address on a navy plate). Nothing on the site uses it — it is kept as a vector
+master for print, email signatures, and social. The two source PNGs are kept as
+the colour reference and as a fallback for tools that cannot take SVG.
+
+Neither SVG references a font: the letterforms are outlined paths, so they
+render identically everywhere and need no webfont to load.
 
 Sections alternate navy and warm white: hero and the strip below it, Approach,
 About, and Contact are

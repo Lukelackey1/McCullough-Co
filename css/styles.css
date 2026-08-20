@@ -798,15 +798,32 @@ body.modal-open { overflow: hidden; }
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.footer-banner {
+/* The logo sits straight on the footer, not in its own panel. The old banner
+   PNG baked in a lighter navy plate, which read as a card pasted onto the
+   footer rather than part of it. */
+.footer-logo {
   display: block;
   width: 100%;
-  max-width: 100%;
+  max-width: 330px;
   height: auto;
-  margin: 0 auto 18px;
-  border-radius: 6px;
+  margin: 0 auto 14px;
 }
 .footer-inner p { margin: 6px 0; font-size: 0.85rem; }
+
+/* Phone and address used to live inside the banner image. As real text they
+   are selectable, tappable on mobile, and readable by search engines. */
+.footer-contact {
+  color: var(--on-navy-soft);
+  letter-spacing: 0.02em;
+}
+.footer-contact a { color: var(--sage); }
+.footer-contact a:hover,
+.footer-contact a:focus-visible { text-decoration: underline; }
+.footer-contact .sep { padding: 0 8px; opacity: 0.5; }
+
+@media (max-width: 420px) {
+  .footer-contact .sep { display: block; height: 0; padding: 0; overflow: hidden; }
+}
 
 /* CC BY attribution for the hero footage — required by the license, but kept
    folded away behind a tap so it doesn't compete with the real footer content. */
