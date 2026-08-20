@@ -51,8 +51,19 @@ sage, which read as muddy gold against the cream sections.
 | `--sage` | `#d0db96` | Accents on navy only — hero, nav, buttons, modal header |
 | `--sage-deep` | `#b3bd78` | Deeper sage from the logo's phone pill; currently unused |
 
-Sage is the only accent color, and it belongs on navy. On cream and white the
-accent is navy instead — sage goes muddy on warm light backgrounds.
+Sage is the only accent color, and it belongs on navy. On light backgrounds the
+accent is navy instead — sage goes muddy on warm light.
+
+Sections alternate navy and warm white: hero and the strip below it, Approach,
+About, and Contact (which runs straight into the footer as one navy block) are
+`.section-navy`; Services, Values, and FAQ are plain `.section`. That puts about
+60% of the page on navy. `.section-navy` inverts the type but leaves nested cards
+alone, since they keep their own light fill. A `.section-alt` class is still
+defined for a cream band (`--cream`), but nothing uses it right now.
+
+Note that `--white` (`#f5efe0`) is the warm page background *and* the type color
+on navy, so cards use `--surface` (`#fdfbf6`) instead — a `--white` card on a
+plain section would be invisible against it.
 
 ## Outstanding for launch (alpha placeholders)
 

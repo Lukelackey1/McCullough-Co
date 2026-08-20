@@ -312,6 +312,37 @@ h1, h2, h3 {
 .section { padding: 88px 0; }
 .section-alt { background: var(--cream); }
 
+/* Navy sections — inverts the type; nested white cards keep their own colors.
+   Used on Approach and Contact so the page leans blue rather than cream. */
+.section-navy { background: var(--navy); }
+.section-navy > .container > .eyebrow,
+.section-navy .eyebrow { color: var(--sage); }
+.section-navy .section-title,
+.section-navy h2 { color: var(--white); }
+.section-navy > .container > p { color: var(--on-navy-soft); }
+
+/* Approach cards sit on navy: the hairline navy border vanishes there, so it
+   becomes a light one, and the connector line flips to light as well. */
+.section-navy .approach-steps li { border-color: rgba(255, 255, 255, 0.16); }
+.section-navy .approach-steps li:hover { border-color: rgba(255, 255, 255, 0.34); }
+.section-navy .approach-steps li::after { background: rgba(255, 255, 255, 0.28); }
+
+/* About block on navy — copy is nested in .about-copy, so it needs its own rules */
+.section-navy .about-copy p { color: var(--on-navy-soft); }
+.section-navy .about-role { color: var(--sage); }
+.section-navy .pull-quote {
+  color: var(--white);
+  border-left-color: var(--sage);
+}
+
+/* Contact block on navy */
+.section-navy .contact-sub { color: var(--on-navy-soft); }
+.section-navy .contact-details {
+  color: var(--white);
+  border-top-color: rgba(255, 255, 255, 0.22);
+}
+.section-navy .contact-details a:hover { color: var(--sage); }
+
 /* Approach steps */
 .approach-steps {
   list-style: none;
@@ -387,10 +418,13 @@ h1, h2, h3 {
 }
 .value-card {
   padding: 26px;
-  background: var(--white);
+  /* --surface, not --white: the warm-white sections use --white as their own
+     background, so a --white card is invisible against them. */
+  background: var(--surface);
   border: 1px solid rgba(52, 74, 102, 0.16);
   border-left: 4px solid var(--navy);
   border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(23, 24, 26, 0.04), 0 14px 34px -22px rgba(23, 24, 26, 0.55);
 }
 .value-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--navy-dark); font-weight: 700; }
 .value-card p { color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
