@@ -55,7 +55,9 @@ body {
   color: var(--ink);
   background: var(--white);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  /* No -webkit-font-smoothing: antialiased here. It thins every stroke on
+     macOS and iOS, which is the opposite of what light-on-navy text needs —
+     the OS default renders noticeably crisper. */
 }
 
 img { max-width: 100%; display: block; }
@@ -481,12 +483,23 @@ section[id] { scroll-margin-top: var(--header-h); }
   padding: 26px;
   background: var(--card);
   border: 1px solid var(--card-line);
-  /* Sage, not navy: the old navy rule was the same colour as the card now. */
-  border-left: 4px solid var(--sage);
+  /* White, not navy: the old navy rule was the same colour as the card now. */
+  border-left: 4px solid rgba(255, 255, 255, 0.75);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
 }
-.value-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--white); font-weight: 700; }
+/* Inter, not the serif. Cormorant Garamond is a display face with hairline
+   thins that fall apart at card-heading sizes, and weight 700 was never
+   loaded for it (only 400/500/600), so the browser was faking the bold by
+   smearing 600 — the single biggest source of the fuzz. */
+.value-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--white);
+  font-weight: 600;
+}
 .value-card p { color: var(--white); font-size: 0.94rem; margin: 0; }
 
 /* About */
@@ -559,7 +572,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--sage);
+  background: rgba(255, 255, 255, 0.85);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.28s ease;
@@ -567,7 +580,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 .service-card:hover,
 .service-card:focus-visible {
   transform: translateY(-4px);
-  border-color: var(--sage);
+  border-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 2px 4px rgba(23, 24, 26, 0.10), 0 16px 30px -12px rgba(36, 51, 71, 0.6);
   outline: none;
 }
@@ -578,12 +591,20 @@ section[id] { scroll-margin-top: var(--header-h); }
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   font-weight: 700;
-  color: var(--sage);
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: 14px;
 }
-/* h3 inherits --navy-dark from the global heading rule, which is the card's
-   own background now, so it has to be set here. */
-.service-card h3 { font-size: 1.3rem; margin: 0 0 10px; color: var(--white); }
+/* Sans for the same reason as .value-card h3. Colour is set explicitly
+   because the global heading rule paints h3 --navy-dark, which is the card's
+   own background now. */
+.service-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  color: var(--white);
+}
 .service-card p {
   color: var(--white);
   font-size: 0.92rem;
@@ -599,7 +620,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--sage);
+  color: var(--white);
 }
 .service-arrow {
   width: 16px;
