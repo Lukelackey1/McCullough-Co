@@ -988,11 +988,9 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 860px) {
   .about-inner { grid-template-columns: 1fr; }
-  /* The box goes square here, and the portrait is 2:3, so cover crops 450px
-     of height away. Centring it would frame his waist; 18% pulls the window
-     up so the face sits in the upper third. */
-  .about-photo { max-width: 240px; aspect-ratio: 1 / 1; }
-  .about-photo img { object-position: 50% 18%; }
+  /* Still 2:3, just narrower — the portrait keeps one shape at every width,
+     so nothing is ever cropped away by the box. */
+  .about-photo { max-width: 240px; }
 }
 
 /* One idea below: the desktop type and spacing scale is built for a 1140px
@@ -1047,20 +1045,19 @@ body.modal-open { overflow: hidden; }
   .approach-steps p { font-size: 0.76rem; line-height: 1.4; }
 
   /* The portrait leads the section instead of sitting beside the name as a
-     byline thumbnail — at 92px the face was a smudge. Square rather than the
-     source 2:3: cover then keeps the top two thirds of the frame, ending at
-     mid-thigh, where 4:5 would have to cut at the shin. The 18% offset set in
-     the 860px block still frames the face here. Held to 300px and left on the
-     text's edge: full column width made it the whole first screen, and the
-     inset stays on the same spine as the eyebrow and the name. */
+     byline thumbnail — at 92px the face was a smudge. It runs the full column
+     at the same 2:3 the desktop column uses, so the whole standing figure is
+     there and both edges line up with the copy; a narrower box left it sitting
+     just short of the right margin, which read as a mistake rather than an
+     inset. 400px, not 360: it has to clear the 392px column of the widest
+     phones, or those get the short-of-the-margin look back. */
   .about-inner {
     grid-template-columns: 1fr;
     row-gap: 18px;
   }
   .about-photo {
     width: 100%;
-    max-width: 300px;
-    aspect-ratio: 1 / 1;
+    max-width: 400px;
   }
   /* Back up to the size the rest of the page reads at. The byline layout paid
      for its density by setting this copy at 0.84rem, below anything else on a
@@ -1068,7 +1065,7 @@ body.modal-open { overflow: hidden; }
   .about-copy h2 { margin: 0 0 4px; }
   .about-role { font-size: 0.95rem; margin-top: 0; margin-bottom: 14px; }
   .about-copy p { font-size: 0.95rem; line-height: 1.65; margin-bottom: 14px; }
-  .pull-quote { font-size: 1.25rem; padding-left: 16px; margin: 16px 0 0; }
+  .pull-quote { font-size: 1.4rem; padding-left: 16px; margin: 18px 0 0; }
 
   .accordion-toggle { padding: 14px 16px; font-size: 0.92rem; }
   .accordion-panel p,
