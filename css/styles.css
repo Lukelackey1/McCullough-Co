@@ -519,7 +519,6 @@ section[id] { scroll-margin-top: var(--header-h); }
   border-radius: var(--radius);
   overflow: hidden;
 }
-.about-photo picture { display: contents; }
 .about-photo img {
   width: 100%;
   height: 100%;
@@ -989,11 +988,11 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 860px) {
   .about-inner { grid-template-columns: 1fr; }
-  /* Matches the <picture> switch at this same width: below it the square
-     head-and-shoulders crop is served, so the frame goes back to 1:1. The
-     standing shot's height only pays off beside the copy, not stacked above
-     it or shrunk to a byline stamp. */
+  /* The box goes square here, and the portrait is 2:3, so cover crops 450px
+     of height away. Centring it would frame his waist; 18% pulls the window
+     up so the face sits in the upper third. */
   .about-photo { max-width: 240px; aspect-ratio: 1 / 1; }
+  .about-photo img { object-position: 50% 18%; }
 }
 
 /* One idea below: the desktop type and spacing scale is built for a 1140px
