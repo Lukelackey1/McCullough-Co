@@ -25,6 +25,13 @@
   --surface: #fdfbf6;
   --surface-tint: #f7f4ec;
   --line: #e2ddd0;
+  /* Cards sit on the --white (#f5efe0) sections. --surface is only a
+     hair above that, so cards read as a haze rather than a panel; --card
+     is the near-white that gives them a visible edge. */
+  --card: #fffdf8;
+  /* Navy-tinted, not warm gray: it holds its edge against the cream. */
+  --card-line: rgba(52, 74, 102, 0.28);
+  --card-shadow: 0 1px 2px rgba(23, 24, 26, 0.05), 0 8px 18px -10px rgba(36, 51, 71, 0.35);
 
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -471,16 +478,14 @@ section[id] { scroll-margin-top: var(--header-h); }
 }
 .value-card {
   padding: 26px;
-  /* --surface, not --white: the warm-white sections use --white as their own
-     background, so a --white card is invisible against them. */
-  background: var(--surface);
-  border: 1px solid rgba(52, 74, 102, 0.16);
+  background: var(--card);
+  border: 1px solid var(--card-line);
   border-left: 4px solid var(--navy);
   border-radius: var(--radius);
-  box-shadow: 0 1px 2px rgba(23, 24, 26, 0.04), 0 14px 34px -22px rgba(23, 24, 26, 0.55);
+  box-shadow: var(--card-shadow);
 }
 .value-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: var(--navy-dark); font-weight: 700; }
-.value-card p { color: var(--ink-soft); font-size: 0.94rem; margin: 0; }
+.value-card p { color: var(--ink); font-size: 0.94rem; margin: 0; }
 
 /* About */
 .about-inner {
@@ -489,18 +494,22 @@ section[id] { scroll-margin-top: var(--header-h); }
   gap: 56px;
   align-items: start;
 }
+/* 2:3, matching the standing portrait's own crop so nothing is cut off. A
+   square left 280px of photo against ~500px of copy, which read as a stamp
+   pinned to the corner; the taller frame carries the column down the text. */
 .about-photo {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 2 / 3;
   background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%);
   border-radius: var(--radius);
   overflow: hidden;
 }
+.about-photo picture { display: contents; }
 .about-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 20%;
+  object-position: 50% 50%;
 }
 .about-role {
   color: var(--navy);
@@ -532,10 +541,11 @@ section[id] { scroll-margin-top: var(--header-h); }
   align-items: flex-start;
   text-align: left;
   font-family: var(--font-sans);
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--card);
+  border: 1px solid var(--card-line);
   border-radius: 14px;
   padding: 30px 28px 26px;
+  box-shadow: var(--card-shadow);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
@@ -555,8 +565,8 @@ section[id] { scroll-margin-top: var(--header-h); }
 .service-card:hover,
 .service-card:focus-visible {
   transform: translateY(-4px);
-  border-color: rgba(52, 74, 102, 0.35);
-  box-shadow: 0 14px 30px rgba(52, 74, 102, 0.13);
+  border-color: var(--navy);
+  box-shadow: 0 2px 4px rgba(23, 24, 26, 0.06), 0 14px 26px -12px rgba(36, 51, 71, 0.45);
   outline: none;
 }
 .service-card:hover::before,
@@ -571,7 +581,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 }
 .service-card h3 { font-size: 1.3rem; margin: 0 0 10px; }
 .service-card p {
-  color: var(--ink-soft);
+  color: var(--ink);
   font-size: 0.92rem;
   margin: 0 0 20px;
 }
@@ -949,7 +959,11 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 860px) {
   .about-inner { grid-template-columns: 1fr; }
-  .about-photo { max-width: 240px; }
+  /* Matches the <picture> switch at this same width: below it the square
+     head-and-shoulders crop is served, so the frame goes back to 1:1. The
+     standing shot's height only pays off beside the copy, not stacked above
+     it or shrunk to a byline stamp. */
+  .about-photo { max-width: 240px; aspect-ratio: 1 / 1; }
 }
 
 /* One idea below: the desktop type and spacing scale is built for a 1140px
@@ -1041,7 +1055,10 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 760px) {
-  .who-strip-inner { flex-direction: column; align-items: center; gap: 12px; }
+  .who-strip-inner { flex-direction: column; align-items: center; gap: 10px; }
+  /* Six audiences wrap to several lines at the desktop gap; tighten it so
+     the strip stays a band rather than a block. */
+  .who-list { gap: 8px 18px; justify-content: center; font-size: 0.88rem; }
 
   .service-grid { grid-template-columns: 1fr; }
 

@@ -11,7 +11,7 @@
 <!-- Bump ?v= on every deploy that changes CSS or JS. GitHub Pages serves these
      with a 10-minute cache, so without the bump returning visitors keep running
      the old file until it expires. -->
-<link rel="stylesheet" href="css/styles.css?v=12">
+<link rel="stylesheet" href="css/styles.css?v=13">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%233c4a5c%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23c9b77c%22 font-family=%22Georgia,serif%22>M</text></svg>">
 </head>
 <body>
@@ -79,6 +79,7 @@
       <span class="who-label">Who We Serve</span>
       <ul class="who-list">
         <li>Small Businesses</li>
+        <li>Farmers &amp; Ranchers</li>
         <li>Independent Contractors</li>
         <li>Sole Proprietors</li>
         <li>Couples</li>
@@ -201,7 +202,7 @@
   <section class="section">
     <div class="container">
       <p class="eyebrow center">What Our Customers Value</p>
-      <h2 class="section-title center">Why Customers Choose Us</h2>
+      <h2 class="section-title center">Why Customers Choose McCullough &amp; Company</h2>
 
       <div class="values-grid">
         <div class="value-card">
@@ -228,7 +229,13 @@
   <section id="about" class="section section-navy about-section">
     <div class="container about-inner">
       <div class="about-photo">
-        <img src="images/jd-headshot.webp" alt="J.D. McCullough, Jr., Founder of McCullough & Company">
+        <!-- Two crops of the same portrait: the standing shot fills the tall
+             column beside the copy, and the square head-and-shoulders keeps a
+             readable face at the ~92px the handheld byline gives it. -->
+        <picture>
+          <source media="(max-width: 860px)" srcset="images/jd-headshot.webp">
+          <img src="images/jd-portrait.webp" alt="J.D. McCullough, Jr., Founder of McCullough & Company">
+        </picture>
       </div>
       <div class="about-copy">
         <p class="eyebrow">About Us</p>
