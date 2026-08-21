@@ -25,14 +25,15 @@
   --surface: #fdfbf6;
   --surface-tint: #f7f4ec;
   --line: #e2ddd0;
-  /* Cards are navy on the cream --white (#f5efe0) sections. A near-white card
-     was only a few percent off that background, so the grids read as a haze no
-     matter how the border was tuned; inverting them is the one step the palette
-     offers that cannot be mistaken for fog. Accents inside a card must come
-     from --sage, not --navy, or they disappear into the card itself. */
-  --card: var(--navy);
-  --card-line: var(--navy-deep);
-  --card-shadow: 0 1px 2px rgba(23, 24, 26, 0.10), 0 10px 22px -12px rgba(36, 51, 71, 0.55);
+  /* Cards sit light on the cream --white (#f5efe0) sections. The card set was
+     briefly inverted to navy while chasing a fuzziness that turned out to be a
+     type problem, not a contrast one; with the headings on Inter the light card
+     is both sharper (dark-on-light does not bloom the way light-on-dark does)
+     and quieter. --card-line is navy-tinted rather than warm gray so the edge
+     still holds against the cream. */
+  --card: #fffdf8;
+  --card-line: rgba(52, 74, 102, 0.28);
+  --card-shadow: 0 1px 2px rgba(23, 24, 26, 0.05), 0 8px 18px -10px rgba(36, 51, 71, 0.35);
 
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -483,8 +484,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   padding: 26px;
   background: var(--card);
   border: 1px solid var(--card-line);
-  /* White, not navy: the old navy rule was the same colour as the card now. */
-  border-left: 4px solid rgba(255, 255, 255, 0.75);
+  border-left: 4px solid var(--navy);
   border-radius: var(--radius);
   box-shadow: var(--card-shadow);
 }
@@ -497,10 +497,10 @@ section[id] { scroll-margin-top: var(--header-h); }
   font-size: 1.05rem;
   letter-spacing: -0.01em;
   margin-bottom: 8px;
-  color: var(--white);
+  color: var(--navy-dark);
   font-weight: 600;
 }
-.value-card p { color: var(--white); font-size: 0.94rem; margin: 0; }
+.value-card p { color: var(--ink); font-size: 0.94rem; margin: 0; }
 
 /* About */
 .about-inner {
@@ -575,7 +575,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   left: 0;
   right: 0;
   height: 3px;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--navy);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.28s ease;
@@ -583,8 +583,8 @@ section[id] { scroll-margin-top: var(--header-h); }
 .service-card:hover,
 .service-card:focus-visible {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 2px 4px rgba(23, 24, 26, 0.10), 0 16px 30px -12px rgba(36, 51, 71, 0.6);
+  border-color: var(--navy);
+  box-shadow: 0 2px 4px rgba(23, 24, 26, 0.06), 0 14px 26px -12px rgba(36, 51, 71, 0.45);
   outline: none;
 }
 .service-card:hover::before,
@@ -594,22 +594,19 @@ section[id] { scroll-margin-top: var(--header-h); }
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--navy);
   margin-bottom: 14px;
 }
-/* Sans for the same reason as .value-card h3. Colour is set explicitly
-   because the global heading rule paints h3 --navy-dark, which is the card's
-   own background now. */
+/* Sans for the same reason as .value-card h3. */
 .service-card h3 {
   font-family: var(--font-sans);
   font-size: 1.12rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0 0 10px;
-  color: var(--white);
 }
 .service-card p {
-  color: var(--white);
+  color: var(--ink);
   font-size: 0.92rem;
   margin: 0 0 20px;
 }
@@ -623,7 +620,7 @@ section[id] { scroll-margin-top: var(--header-h); }
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--navy);
 }
 .service-arrow {
   width: 16px;
