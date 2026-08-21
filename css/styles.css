@@ -1046,18 +1046,20 @@ body.modal-open { overflow: hidden; }
   .approach-steps h3 { font-size: 0.9rem; margin-bottom: 4px; }
   .approach-steps p { font-size: 0.76rem; line-height: 1.4; }
 
-  /* The portrait leads the section at the full column width instead of sitting
-     beside the name as a byline thumbnail — at 92px the face was a smudge.
-     Square rather than the source 2:3: cover then keeps the top two thirds of
-     the frame, ending at mid-thigh, where 4:5 would have to cut at the shin.
-     The 18% offset set in the 860px block still frames the face here. */
+  /* The portrait leads the section instead of sitting beside the name as a
+     byline thumbnail — at 92px the face was a smudge. Square rather than the
+     source 2:3: cover then keeps the top two thirds of the frame, ending at
+     mid-thigh, where 4:5 would have to cut at the shin. The 18% offset set in
+     the 860px block still frames the face here. Held to 300px and left on the
+     text's edge: full column width made it the whole first screen, and the
+     inset stays on the same spine as the eyebrow and the name. */
   .about-inner {
     grid-template-columns: 1fr;
     row-gap: 18px;
   }
   .about-photo {
     width: 100%;
-    max-width: 360px;
+    max-width: 300px;
     aspect-ratio: 1 / 1;
   }
   /* Back up to the size the rest of the page reads at. The byline layout paid
@@ -1066,7 +1068,7 @@ body.modal-open { overflow: hidden; }
   .about-copy h2 { margin: 0 0 4px; }
   .about-role { font-size: 0.95rem; margin-top: 0; margin-bottom: 14px; }
   .about-copy p { font-size: 0.95rem; line-height: 1.65; margin-bottom: 14px; }
-  .pull-quote { font-size: 1.15rem; padding-left: 16px; margin: 16px 0 0; }
+  .pull-quote { font-size: 1.25rem; padding-left: 16px; margin: 16px 0 0; }
 
   .accordion-toggle { padding: 14px 16px; font-size: 0.92rem; }
   .accordion-panel p,
